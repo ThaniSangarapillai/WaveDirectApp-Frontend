@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "437422297177",
+    "firebase_url": "https://wavedirect-9900c.firebaseio.com",
+    "project_id": "wavedirect-9900c",
+    "storage_bucket": "wavedirect-9900c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437422297177:android:1c77bc0158598c8e9aa148",
+        "android_client_info": {
+          "package_name": "com.wavedirectapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437422297177-ktcd3kjihr1iv504rrlp4tmoaj27hidf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZA0IAybLRdrG7fCQU0Ay8l5-3iUyhCZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437422297177-ktcd3kjihr1iv504rrlp4tmoaj27hidf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
