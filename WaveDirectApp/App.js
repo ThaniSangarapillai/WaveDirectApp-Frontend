@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -24,10 +24,9 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import Splash from './Splash';
+import Splash from './components/Splash';
 
 class App extends Component {
-  
   render() {
     return (
       <>
@@ -75,9 +74,8 @@ class App extends Component {
         <Splash></Splash>
       </>
     );
-  };
-  
-};
+  }
+}
 
 const styles = StyleSheet.create({
   scrollView: {
