@@ -7,12 +7,10 @@ import {
   ScrollView,
   TextInput,
   useWindowDimensions,
-  StyleSheet,
   StatusBar,
   Button,
   TouchableOpacity,
 } from 'react-native';
-import {Header} from 'react-native-elements';
 import logo from './logo.png';
 
 const instructions = Platform.select({
@@ -24,12 +22,6 @@ const instructions = Platform.select({
 
 function Splash() {
   const window = useWindowDimensions();
-  // const [drawer, setDrawer] = useState(False);
-  const [title, setTitle] = useState('thani');
-
-  const clickHandler = () => {
-    setTitle = 'pira';
-  };
 
   return (
     <>
