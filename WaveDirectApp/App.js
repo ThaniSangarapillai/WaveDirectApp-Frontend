@@ -26,12 +26,17 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import Splash from './components/Splash';
+import Home from './components/Home';
+import {NavigationContainer} from '@react-navigation/native';
 import Login from './components/Login';
 import Register from './components/Register';
 
 class App extends Component {
   render() {
     return (
+      <NavigationContainer>
+        <Home></Home>
+      </NavigationContainer>
       <>
         {/* <StatusBar barStyle="dark-content" /> */}
         {/* <SafeAreaView>

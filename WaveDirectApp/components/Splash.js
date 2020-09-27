@@ -23,12 +23,6 @@ const instructions = Platform.select({
 
 function Splash() {
   const window = useWindowDimensions();
-  // const [drawer, setDrawer] = useState(False);
-  const [title, setTitle] = useState('thani');
-
-  const clickHandler = () => {
-    setTitle = 'pira';
-  };
 
   return (
     <>
