@@ -14,6 +14,7 @@ import {
   View,
   Text,
   StatusBar,
+  Button
 } from 'react-native';
 
 import {
@@ -25,6 +26,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import Splash from './components/Splash';
+import Login from './components/Login';
+import Register from './components/Register';
 
 class App extends Component {
   render() {
@@ -71,7 +74,13 @@ class App extends Component {
             </View>
           </ScrollView>
         </SafeAreaView> */}
-        <Splash></Splash>
+        {/* <Button
+            onPress={() => {
+              alert('You tapped the button!');
+            }}
+            title="Press"
+          /> */}
+        <Register></Register>
       </>
     );
   }
