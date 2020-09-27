@@ -13,8 +13,10 @@ import {
 } from 'react-native';
 import { Header, Input } from 'react-native-elements';
 import { set } from 'react-native-reanimated';
+import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import logo from './logo.png';
+import { auth } from 'firebase';
 
 
 
@@ -67,7 +69,24 @@ function Login() {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                setErrorMsg(data)
+                if ("message" in data) {
+                    setErrorMsg(data.message)
+                }
+                if (data.type == "message") {
+                    //_storeData(data.auth);
+                    //_retrieveData();
+                    AsyncStorage.setItem('x-wave-auth', data.auth,
+                    () => {
+                        AsyncStorage.getItem('x-wave-auth', (err, result) => {
+                            if (result == null) {
+                                setErrorMsg("Something went Wrong. Please try again.")
+                                console.log(err)
+                            } else {
+                                setErrorMsg("Logged in!")
+                                console.log(result)
+                            }})
+                    })
+                }
             });
 
 
@@ -114,7 +133,7 @@ function Login() {
                             onChangeText(text)
                             console.log(text)
                         }}
-                        value={value}
+                        //value={value}
                         autoCapitalize="none"
                     />
 
@@ -140,11 +159,11 @@ function Login() {
                             onChangePassword(text)
                             console.log(text)
                         }}
-                        password={value}
+                        //password={value}
                         autoCapitalize="none"
                         secureTextEntry={true}
                     />
-                    <Text style={styles.errorText}>{errorMsg.message}</Text>
+                    <Text style={styles.errorText}>{errorMsg}</Text>
                     <View
                         style={{
                             display: "flex",
