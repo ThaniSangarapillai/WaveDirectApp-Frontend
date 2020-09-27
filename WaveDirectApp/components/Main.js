@@ -25,12 +25,14 @@ const Stack = createStackNavigator();
 
 export default class Main extends React.Component {
   createHomeStack = () =>
-    <Stack.Navigator style={{backgroundColor: "#a4161a"}}>
+    <Stack.Navigator >
       <Stack.Screen
         name="Home"
         children={this.createDrawer}
         options={({ navigation }) => ({
           title: "Home",
+          headerTitleStyle: {color: "white"},
+          headerStyle: {backgroundColor: "#161a1d"},
           headerLeft: () =>
             <TouchableOpacity
               onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
@@ -39,7 +41,7 @@ export default class Main extends React.Component {
               name={'menu'}
               title="i"
             >
-              <Text style={{fontFamily: "FontAwesome", fontSize: 20}}>{""}</Text>
+              <Text style={{fontFamily: "FontAwesome", fontSize: 20, color: "white"}}>{""}</Text>
             </TouchableOpacity>
         })
         }
@@ -47,8 +49,8 @@ export default class Main extends React.Component {
     </Stack.Navigator>
 
   createDrawer = () =>
-    <Drawer.Navigator>
-      <Drawer.Screen name="Home" component={Home} />
+    <Drawer.Navigator drawerStyle={{backgroundColor: "#161a1d"}}>
+      <Drawer.Screen name="Home" component={Home} headerTitleStyle={{color: "white"}}/>
       <Drawer.Screen name="IDK" component={ScreenOne} />
       <Drawer.Screen name="About" component={ScreenTwo} />
       <Drawer.Screen name="Settings" component={ScreenThree} />
