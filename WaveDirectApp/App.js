@@ -31,9 +31,10 @@ import Main from './components/Main'
 //import {NavigationContainer} from '@react-navigation/native';
 import Login from './components/Login';
 import Register from './components/Register';
-import Account from './components/Account'
+import Account from './components/Account';
+import Outage from './components/Outage';
 
-class App extends React.Component {
+class App extends Component {
   render() {
     return (
       <>

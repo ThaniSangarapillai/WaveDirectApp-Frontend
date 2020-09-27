@@ -42,9 +42,11 @@ import logo from './logo.png';
 //         });
 // }
 
-function Login({navigation}) {
-    const [value, onChangeText] = React.useState('Email');
-    const [password, onChangePassword] = React.useState('Password');
+function Refer({ navigation }) {
+    const [first, onChangeFirst] = React.useState('');
+    const [last, onChangeLast] = React.useState('');
+    const [phone, onChangePhone] = React.useState('');
+    const [email, onChangeEmail] = React.useState('');
     const [errorMsg, setErrorMsg] = useState('')
 
     function handleClick(value, password) {
@@ -52,7 +54,7 @@ function Login({navigation}) {
             "email": value,
             'password': password
         }))
-        fetch('http://192.168.0.119:5000/login', {
+        fetch('http://192.168.0.119:5000/refer', {
             method: 'POST',
             headers: {
                 Accept: '*',
@@ -60,8 +62,10 @@ function Login({navigation}) {
                 Origin: 'AUTHORITY',
             },
             body: JSON.stringify({
-                "email": value,
-                'password': password
+                "email": email,
+                'first': first,
+                'last': last,
+                "phone": phone
             })
         })
             .then(response => response.json())
@@ -69,22 +73,6 @@ function Login({navigation}) {
                 console.log(data);
                 if ("message" in data) {
                     setErrorMsg(data.message)
-                }
-                if (data.type == "message") {
-                    //_storeData(data.auth);
-                    //_retrieveData();
-                    AsyncStorage.setItem('x-wave-auth', data.auth,
-                    () => {
-                        AsyncStorage.getItem('x-wave-auth', (err, result) => {
-                            if (result == null) {
-                                setErrorMsg("Something went Wrong. Please try again.")
-                                console.log(err)
-                            } else {
-                                setErrorMsg("Logged in!")
-                                console.log(result)
-                                navigation.navigate("Home")
-                            }})
-                    })
                 }
             });
 
@@ -111,7 +99,7 @@ function Login({navigation}) {
                     /> */}
                 <View>
                     <Input
-                        placeholder='Email'
+                        placeholder='First Name'
                         inputStyle={{
                             color: "#FFFFFF",
                             fontFamily: "Poppins-Medium",
@@ -121,23 +109,15 @@ function Login({navigation}) {
                             color: "#ba181b"
                         }}
                         inputContainerStyle={styles.instructions}
-                        leftIcon={
-                            <Icon
-                                name='user'
-                                size={30}
-                                color='#660708'
-                            />
-                        }
                         onChangeText={text => {
-                            onChangeText(text)
+                            onChangeFirst(text)
                             console.log(text)
                         }}
-                        //value={value}
-                        autoCapitalize="none"
+                    //value={value}
                     />
 
                     <Input
-                        placeholder='Password'
+                        placeholder='Last Name'
                         inputStyle={{
                             color: "#ba181b",
                             fontFamily: "Poppins-Medium",
@@ -147,44 +127,70 @@ function Login({navigation}) {
                             color: "#ba181b"
                         }}
                         inputContainerStyle={styles.instructions}
-                        leftIcon={
-                            <Icon
-                                name='lock'
-                                size={30}
-                                color='#660708'
-                            />
-                        }
                         onChangeText={text => {
-                            onChangePassword(text)
+                            onChangeLast(text)
                             console.log(text)
                         }}
-                        //password={value}
-                        autoCapitalize="none"
-                        secureTextEntry={true}
+                    //password={value}
                     />
-                    <Text style={styles.errorText}>{errorMsg}</Text>
-                    <View
-                        style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center"
+                    <Input
+                        placeholder='Email'
+                        inputStyle={{
+                            color: "#ba181b",
+                            fontFamily: "Poppins-Medium",
                         }}
-                    >
-                        <TouchableOpacity
-                            style={styles.signin}
-                            onPress={() => { handleClick(value, password) }}
-                        >
-                            <Text style={styles.signinText}>Sign in</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.back}
-                            onPress={() => { navigation.navigate('Splash')}}
-                        >
-                            <Text style={styles.backText}>Back</Text>
-                        </TouchableOpacity>
-                    </View>
-
+                        placeholderTextColor="#FFFFFF"
+                        labelStyle={{
+                            color: "#ba181b"
+                        }}
+                        inputContainerStyle={styles.instructions}
+                        onChangeText={text => {
+                            onChangeEmail(text)
+                            console.log(text)
+                        }}
+                    //password={value}
+                    />
+                    <Input
+                        placeholder='Phone'
+                        inputStyle={{
+                            color: "#ba181b",
+                            fontFamily: "Poppins-Medium",
+                        }}
+                        placeholderTextColor="#FFFFFF"
+                        labelStyle={{
+                            color: "#ba181b"
+                        }}
+                        inputContainerStyle={styles.instructions}
+                        onChangeText={text => {
+                            onChangePhone(text)
+                            console.log(text)
+                        }}
+                    />
                 </View>
+
+                <Text style={styles.errorText}>{errorMsg}</Text>
+                <View
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center"
+                    }}
+                >
+                    <TouchableOpacity
+                        style={styles.signin}
+                        onPress={() => { handleClick() }}
+                    >
+                        <Text style={styles.signinText}>Refer</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.back}
+                        onPress={() => { navigation.navigate('Home') }}
+                    >
+                        <Text style={styles.backText}>Back</Text>
+                    </TouchableOpacity>
+                </View>
+
+
 
             </View>
         </>
@@ -225,6 +231,9 @@ const styles = StyleSheet.create({
         color: '#f5f3f4',
         textAlign: 'center',
         fontFamily: 'Poppins-Medium',
+        marginLeft: "10%",
+        marginRight: "10%",
+        width: "100%"
     },
     back: {
         fontSize: 15,
@@ -253,4 +262,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Login;
+export default Refer;

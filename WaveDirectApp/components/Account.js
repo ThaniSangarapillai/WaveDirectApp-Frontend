@@ -425,6 +425,12 @@ export default function Account() {
                     >
                         <Text style={styles.helpText}>Call Us</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.help}
+                        onPress={() => { Linking.openURL('tel:${5197379283}') }}
+                    >
+                        <Text style={styles.helpText}>Call Us</Text>
+                    </TouchableOpacity>
                 </View>
             </ViewPager>
             <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} >
@@ -506,8 +512,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         flex: 1,
         backgroundColor: '#161a1d',
-        paddingTop: 20,
-        paddingBottom: 10,
+        paddingTop: 10,
+        paddingBottom: 0,
         width: "100%"
     },
     inputbox: {

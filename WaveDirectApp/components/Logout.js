@@ -15,15 +15,8 @@ import { Header } from 'react-native-elements';
 import logo from './logo.png';
 import AsyncStorage from '@react-native-community/async-storage'
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
-function Splash({navigation}) {
-  const window = useWindowDimensions();
+function Logout({navigation}) {
 
   useEffect(() => {
     AsyncStorage.getItem('x-wave-auth', (err, result) => {
@@ -34,7 +27,7 @@ function Splash({navigation}) {
           //setErrorMsg("Logged in!")
           console.log(result)
 
-          fetch('http://192.168.0.119:5000/json', {
+          fetch('http://192.168.0.119:5000/logout', {
               method: 'GET',
               headers: {
                   Accept: '*',
@@ -46,8 +39,9 @@ function Splash({navigation}) {
               .then(response => response.json())
               .then(data => {
                 console.log(data)
-                  if (data.type == "message"){
-                    navigation.navigate("Home")
+                  if (data.message == "ok"){
+                    AsyncStorage.removeItem('x-wave-auth')
+                    navigation.navigate("Splash")
                   }
               });
 
@@ -61,36 +55,6 @@ function Splash({navigation}) {
       {/* <Header></Header> */}
       <View style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor="#161a1d" />
-        <Text
-          style={{
-            fontFamily: 'Poppins-Black',
-            fontSize: 50,
-            color: '#ffffff',
-            paddingBottom: 100,
-          }}>
-          WaveDirect
-        </Text>
-        <View
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-          }}>
-          <TouchableOpacity
-            style={styles.register}
-            onPress={() => {
-              navigation.navigate("Register")
-            }}
-          >
-            <Text style={styles.registerText}>Register</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.signin}
-            onPress={() => {
-              navigation.navigate("Login")
-            }}
-          >
-            <Text style={styles.signinText}>Sign in</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     </>
   );
@@ -160,4 +124,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Splash;
+export default Logout;

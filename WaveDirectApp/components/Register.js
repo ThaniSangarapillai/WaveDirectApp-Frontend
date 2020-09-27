@@ -12,11 +12,12 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import { Header, Input } from 'react-native-elements';
-import ViewPager from '@react-native-community/viewpager';
-import { add, set } from 'react-native-reanimated';
+import { set } from 'react-native-reanimated';
+import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ViewPager from '@react-native-community/viewpager';
 import logo from './logo.png';
-
+import { auth } from 'firebase';
 
 
 // function handleClick(value, password) {
@@ -43,7 +44,7 @@ import logo from './logo.png';
 //         });
 // }
 
-function Register() {
+function Register({navigation}) {
     const [value, onChangeText] = React.useState('');
     const [password, onChangePassword] = React.useState('');
     const [firstName, onChangeFirst] = React.useState('');
@@ -94,6 +95,7 @@ function Register() {
                 setErrorMsg(data)
                 if (data.type == "message") {
                     setRegisterState(true);
+                    navigation.navigate("Splash")
                 }
             });
 
@@ -356,7 +358,7 @@ function Register() {
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.back}
-                            onPress={() => { handleClick(value, password) }}
+                            onPress={() => { navigation.navigate("Splash") }}
                         >
                             <Text style={styles.backText}>Back</Text>
                         </TouchableOpacity>
