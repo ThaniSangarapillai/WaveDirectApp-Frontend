@@ -26,10 +26,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import Splash from './components/Splash';
-import Home from './components/Home';
 import { NavigationContainer } from '@react-navigation/native';
-import Login from './components/Login';
-import Register from './components/Register';
 import Main from './components/Main'
 //import {NavigationContainer} from '@react-navigation/native';
 import Login from './components/Login';
