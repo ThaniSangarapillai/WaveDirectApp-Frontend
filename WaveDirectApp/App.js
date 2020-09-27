@@ -31,6 +31,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import Login from './components/Login';
 import Register from './components/Register';
 import Main from './components/Main'
+//import {NavigationContainer} from '@react-navigation/native';
+import Login from './components/Login';
+import Register from './components/Register';
+import Account from './components/Account'
 
 class App extends React.Component {
   render() {
@@ -88,6 +92,59 @@ class App extends React.Component {
       //     /> */}
       //   <Register></Register>
       // </>
+      //   <NavigationContainer>
+      //     <Home></Home>
+      //   </NavigationContainer>
+      <>
+        {/* <StatusBar barStyle="dark-content" /> */}
+        {/* <SafeAreaView>
+          <ScrollView
+            contentInsetAdjustmentBehavior="automatic"
+            style={styles.scrollView}>
+            <Header />
+            {global.HermesInternal == null ? null : (
+              <View style={styles.engine}>
+                <Text style={styles.footer}>Engine: Hermes</Text>
+              </View>
+            )}
+            <View style={styles.body}>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>Step One</Text>
+                <Text style={styles.sectionDescription}>
+                  Edit <Text style={styles.highlight}>App.js</Text> to change this
+                  screen and then come back to see your stuff.
+                </Text>
+              </View>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>See Your Changes</Text>
+                <Text style={styles.sectionDescription}>
+                  <ReloadInstructions />
+                </Text>
+              </View>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>Debug</Text>
+                <Text style={styles.sectionDescription}>
+                  <DebugInstructions />
+                </Text>
+              </View>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>Learn More</Text>
+                <Text style={styles.sectionDescription}>
+                  Read the docs to discover what to do next:
+                </Text>
+              </View>
+              <LearnMoreLinks />
+            </View>
+          </ScrollView>
+        </SafeAreaView> */}
+        {/* <Button
+            onPress={() => {
+              alert('You tapped the button!');
+            }}
+            title="Press"
+          /> */}
+        <Account></Account>
+      </>
     );
   }
 }
