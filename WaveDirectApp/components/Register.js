@@ -117,18 +117,20 @@ function Register() {
                             borderBottomColor: "#00000000"
                         }}
                     /> */}
+                
                 <Text
                     style={{
                         fontFamily: 'Poppins-Medium',
                         fontSize: 30,
                         color: '#ffffff',
-                        paddingBottom: 10,
+                        position: "absolute",
+                        top: "10%"
                     }}>
                     Register
                 </Text>
-                <ViewPager style={{ flex: 1, width: "100%" }} orientation="horizontal" initialPage={0} onPageScroll={(e) => handlePageChange(e.nativeEvent.position)}>
+                <ViewPager style={{ flex: 1, display: "flex", width: "100%"}} orientation="horizontal" initialPage={0} onPageScroll={(e) => handlePageChange(e.nativeEvent.position)}>
 
-                    <View key="1">
+                    <View key="1" style={styles.registerBox}>
                         <Input
                             placeholder='Email'
                             inputStyle={styles.inputbox}
@@ -162,7 +164,7 @@ function Register() {
                             secureTextEntry={true}
                         />
                     </View>
-                    <View key="2">
+                    <View key="2" style={styles.registerBox}>
                         <Input
                             placeholder='First Name'
                             inputStyle={styles.inputbox}
@@ -194,7 +196,7 @@ function Register() {
                             autoCapitalize="none"
                         />
                     </View>
-                    <View key="3">
+                    <View key="3" style={styles.registerBox}>
                         <Input
                             placeholder='Address'
                             inputStyle={styles.inputbox}
@@ -256,7 +258,7 @@ function Register() {
                             autoCapitalize="none"
                         />
                     </View>
-                    <View key="4">
+                    <View key="4" style={styles.registerBox}>
                         <Input
                             placeholder='Phone'
                             inputStyle={styles.inputbox}
@@ -278,7 +280,14 @@ function Register() {
 
                 </ViewPager>
                 <Text style={styles.errorText}>{errorMsg.message}</Text>
-                <View>
+                <View
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "center"
+                    }}
+                >
                     {
                         pageState.map(
                             (selected, index) => {
@@ -288,10 +297,11 @@ function Register() {
                                         style={{
                                             fontFamily: "FontAwesome",
                                             color: "#e5383b",
-                                            fontSize: 30
+                                            fontSize: 30,
+                                            padding: 5
                                         }}
                                         key={index}>
-                                        {"" ? selected : ""}
+                                        { selected ? "" : ""}
                                     </Text>
                                 )
 
@@ -300,18 +310,6 @@ function Register() {
                         )
 
                     }
-                </View>
-                <View>
-                    <Text style={{
-                        fontFamily: "FontAwesome",
-                        color: "#e5383b",
-                        fontSize: 30
-                    }}></Text>
-                    <Text style={{
-                        fontFamily: "FontAwesome",
-                        color: "#e5383b",
-                        fontSize: 30
-                    }}></Text>
                 </View>
                 <View
                     style={{
@@ -353,8 +351,9 @@ const styles = StyleSheet.create({
         // paddingBottom: 50,
     },
     instructions: {
-        width: '85%',
-        borderBottomColor: "#ba181b"
+        borderBottomColor: "#ba181b",
+        marginLeft: "5%",
+        marginRight: "5%"
     },
     signin: {
         fontSize: 15,
@@ -397,12 +396,22 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: 'red',
         textAlign: "center",
-        margin: 40
+        margin: 20
     },
     inputbox: {
         color: "#FFFFFF",
         fontFamily: "Poppins-Medium",
-        fontSize: 15
+        fontSize: 15,
+
+
+    },
+    registerBox: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        alignContent: "center",
+        textAlign: "center"
     }
 });
 
