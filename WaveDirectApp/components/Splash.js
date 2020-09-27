@@ -1,4 +1,4 @@
-import React, {useReducer, Component, useState} from 'react';
+import React, { useReducer, Component, useState } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
   Button,
   TouchableOpacity,
 } from 'react-native';
+import { Header } from 'react-native-elements';
 import logo from './logo.png';
 
 const instructions = Platform.select({
@@ -42,7 +43,18 @@ function Splash() {
             display: 'flex',
             alignItems: 'center',
           }}>
-          <TouchableOpacity style={styles.register}>
+          <Button
+            onPress={() => {
+              alert('You tapped the button!');
+            }}
+            title="Press"
+          />
+          <TouchableOpacity
+            style={styles.register}
+            onPress={() => {
+              alert('You tapped the button!');
+            }}
+          >
             <Text style={styles.registerText}>Register</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.signin}>
