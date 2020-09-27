@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { Header, Input } from 'react-native-elements';
 import ViewPager from '@react-native-community/viewpager';
-import { set } from 'react-native-reanimated';
+import { add, set } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import logo from './logo.png';
 
@@ -44,8 +44,8 @@ import logo from './logo.png';
 // }
 
 function Register() {
-    const [value, onChangeText] = React.useState('Email');
-    const [password, onChangePassword] = React.useState('Password');
+    const [value, onChangeText] = React.useState('');
+    const [password, onChangePassword] = React.useState('');
     const [firstName, onChangeFirst] = React.useState('');
     const [lastName, onChangeLast] = React.useState('');
     const [address, onChangeAddress] = React.useState('');
@@ -55,13 +55,21 @@ function Register() {
     const [phone, onChangePhone] = React.useState('');
     const [errorMsg, setErrorMsg] = useState('')
     const [pageState, setPageState] = useState([true, false, false, false])
+    const [registerState, setRegisterState] = useState(false)
 
-    function handleClick(value, password) {
+    function handleClick() {
         console.log(JSON.stringify({
             "email": value,
-            'password': password
+            'password': password,
+            "first": firstName,
+            "last": lastName,
+            "address": address,
+            "town": town,
+            "province":province,
+            "country":country,
+            "phone": phone
         }))
-        fetch('http://192.168.0.119:5000/login', {
+        fetch('http://192.168.0.119:5000/register', {
             method: 'POST',
             headers: {
                 Accept: '*',
@@ -70,13 +78,23 @@ function Register() {
             },
             body: JSON.stringify({
                 "email": value,
-                'password': password
+                'password': password,
+                "first": firstName,
+                "last": lastName,
+                "address": address,
+                "town": town,
+                "province":province,
+                "country":country,
+                "phone": phone
             })
         })
             .then(response => response.json())
             .then(data => {
                 console.log(data);
                 setErrorMsg(data)
+                if (data.type == "message") {
+                    setRegisterState(true);
+                }
             });
 
 
@@ -117,18 +135,18 @@ function Register() {
                             borderBottomColor: "#00000000"
                         }}
                     /> */}
-                
+
                 <Text
                     style={{
                         fontFamily: 'Poppins-Medium',
                         fontSize: 30,
                         color: '#ffffff',
-                        position: "absolute",
-                        top: "10%"
+                        paddingTop: "10%",
+                        paddingBottom: "10%"
                     }}>
                     Register
                 </Text>
-                <ViewPager style={{ flex: 1, display: "flex", width: "100%"}} orientation="horizontal" initialPage={0} onPageScroll={(e) => handlePageChange(e.nativeEvent.position)}>
+                <ViewPager style={{ flex: 1, display: "flex", width: "100%" }} orientation="horizontal" initialPage={0} onPageScroll={(e) => handlePageChange(e.nativeEvent.position)} scrollEnabled={true}>
 
                     <View key="1" style={styles.registerBox}>
                         <Input
@@ -143,8 +161,9 @@ function Register() {
                                 onChangeText(text)
                                 console.log(text)
                             }}
-                            value={value}
+                            //email={value}
                             autoCapitalize="none"
+                            disabled={registerState}
                         />
 
                         <Input
@@ -157,11 +176,11 @@ function Register() {
                             inputContainerStyle={styles.instructions}
                             onChangeText={text => {
                                 onChangePassword(text)
-                                console.log(text)
                             }}
                             password={value}
                             autoCapitalize="none"
                             secureTextEntry={true}
+                            disabled={registerState}
                         />
                     </View>
                     <View key="2" style={styles.registerBox}>
@@ -178,7 +197,8 @@ function Register() {
                                 console.log(text)
                             }}
                             value={firstName}
-                            autoCapitalize="none"
+                            //autoCapitalize="none"
+                            disabled={registerState}
                         />
                         <Input
                             placeholder='Last Name'
@@ -193,7 +213,9 @@ function Register() {
                                 console.log(text)
                             }}
                             value={lastName}
-                            autoCapitalize="none"
+                            //autoCapitalize="none"
+                            disabled={registerState}
+
                         />
                     </View>
                     <View key="3" style={styles.registerBox}>
@@ -210,7 +232,8 @@ function Register() {
                                 console.log(text)
                             }}
                             value={address}
-                            autoCapitalize="none"
+                            disabled={registerState}
+                            //autoCapitalize="none"
                         />
                         <Input
                             placeholder='Town'
@@ -225,7 +248,8 @@ function Register() {
                                 console.log(text)
                             }}
                             value={town}
-                            autoCapitalize="none"
+                            disabled={registerState}
+                            //autoCapitalize="none"
                         />
                         <Input
                             placeholder='Province/State'
@@ -240,7 +264,8 @@ function Register() {
                                 console.log(text)
                             }}
                             value={province}
-                            autoCapitalize="none"
+                            disabled={registerState}
+                            //autoCapitalize="none"
                         />
                         <Input
                             placeholder='Country'
@@ -255,7 +280,8 @@ function Register() {
                                 console.log(text)
                             }}
                             value={country}
-                            autoCapitalize="none"
+                            disabled={registerState}
+                            //autoCapitalize="none"
                         />
                     </View>
                     <View key="4" style={styles.registerBox}>
@@ -272,6 +298,7 @@ function Register() {
                                 console.log(text)
                             }}
                             value={phone}
+                            disabled={registerState}
                             autoCapitalize="none"
                         />
                     </View>
@@ -279,58 +306,61 @@ function Register() {
 
 
                 </ViewPager>
-                <Text style={styles.errorText}>{errorMsg.message}</Text>
-                <View
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "center"
-                    }}
-                >
-                    {
-                        pageState.map(
-                            (selected, index) => {
-                                console.log(selected, index)
-                                return (
-                                    <Text
-                                        style={{
-                                            fontFamily: "FontAwesome",
-                                            color: "#e5383b",
-                                            fontSize: 30,
-                                            padding: 5
-                                        }}
-                                        key={index}>
-                                        { selected ? "" : ""}
-                                    </Text>
-                                )
-
-
-                            }
-                        )
-
-                    }
-                </View>
-                <View
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "center",
-                        padding: 20
-                    }}
-                >
-                    <TouchableOpacity
-                        style={styles.signin}
-                        onPress={() => { handleClick(value, password) }}
+                <View >
+                    <Text style={styles.errorText}>{errorMsg.message}</Text>
+                    <View
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}
                     >
-                        <Text style={styles.signinText}>Sign in</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.back}
-                        onPress={() => { handleClick(value, password) }}
+                        {
+                            pageState.map(
+                                (selected, index) => {
+                                    console.log(selected, index)
+                                    return (
+                                        <Text
+                                            style={{
+                                                fontFamily: "FontAwesome",
+                                                color: "#e5383b",
+                                                fontSize: 30,
+                                                padding: 5
+                                            }}
+                                            key={index}>
+                                            { selected ? "" : ""}
+                                        </Text>
+                                    )
+
+
+                                }
+                            )
+
+                        }
+                    </View>
+                    <View
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "center",
+                            padding: 20
+                        }}
                     >
-                        <Text style={styles.backText}>Back</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.signin}
+                            onPress={() => { handleClick() }}
+                            disabled={registerState}
+                        >
+                            <Text style={styles.signinText}>Register</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.back}
+                            onPress={() => { handleClick(value, password) }}
+                        >
+                            <Text style={styles.backText}>Back</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </>

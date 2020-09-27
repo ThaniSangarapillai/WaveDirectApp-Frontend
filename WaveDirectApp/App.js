@@ -27,16 +27,17 @@ import {
 
 import Splash from './components/Splash';
 import Home from './components/Home';
-import {NavigationContainer} from '@react-navigation/native';
+//import {NavigationContainer} from '@react-navigation/native';
 import Login from './components/Login';
 import Register from './components/Register';
+import Account from './components/Account'
 
 class App extends Component {
   render() {
     return (
-      <NavigationContainer>
-        <Home></Home>
-      </NavigationContainer>
+    //   <NavigationContainer>
+    //     <Home></Home>
+    //   </NavigationContainer>
       <>
         {/* <StatusBar barStyle="dark-content" /> */}
         {/* <SafeAreaView>
@@ -85,7 +86,7 @@ class App extends Component {
             }}
             title="Press"
           /> */}
-        <Register></Register>
+        <Account></Account>
       </>
     );
   }

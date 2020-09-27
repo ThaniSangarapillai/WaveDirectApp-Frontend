@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Header} from 'react-native-elements';
 import {View, StyleSheet, Button} from 'react-native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {NavigationContainer} from '@react-navigation/native';
+//import {createDrawerNavigator} from '@react-navigation/drawer';
+//import {NavigationContainer} from '@react-navigation/native';
 import App from '../App';
 
 function Home() {
@@ -26,5 +26,6 @@ function Home() {
         <View style={styles.container}></View>
       </>
    );
+        }
 
 export default Home;
