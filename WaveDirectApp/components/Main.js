@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, TouchableOpacity, Text } from 'react-native'; 
+import { Button, TouchableOpacity, Text } from 'react-native';
 import Home from './Home';
 import ScreenOne from './ScreenOne';
 import ScreenTwo from './ScreenTwo';
@@ -23,7 +23,7 @@ const Stack = createStackNavigator();
 // const MaterialBottomtab = createMaterialBottomTabNavigator();
 // const MaterialToptab = createMaterialTopTabNavigator();
 
-export default class Main extends React.Component {
+class Main extends React.Component {
   createHomeStack = () =>
     <Stack.Navigator >
       <Stack.Screen
@@ -31,17 +31,17 @@ export default class Main extends React.Component {
         children={this.createDrawer}
         options={({ navigation }) => ({
           title: "Home",
-          headerTitleStyle: {color: "white"},
-          headerStyle: {backgroundColor: "#161a1d"},
+          headerTitleStyle: { color: "white" },
+          headerStyle: { backgroundColor: "#161a1d" },
           headerLeft: () =>
             <TouchableOpacity
               onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-              style={[{ color: 'white', padding: 15, paddingLeft: 25}]}
+              style={[{ color: 'white', padding: 15, paddingLeft: 25 }]}
               size={24}
               name={'menu'}
               title="i"
             >
-              <Text style={{fontFamily: "FontAwesome", fontSize: 20, color: "white"}}>{""}</Text>
+              <Text style={{ fontFamily: "FontAwesome", fontSize: 20, color: "white" }}>{""}</Text>
             </TouchableOpacity>
         })
         }
@@ -49,8 +49,8 @@ export default class Main extends React.Component {
     </Stack.Navigator>
 
   createDrawer = () =>
-    <Drawer.Navigator drawerStyle={{backgroundColor: "#161a1d"}}>
-      <Drawer.Screen name="Home" component={Home} headerTitleStyle={{color: "white"}}/>
+    <Drawer.Navigator drawerStyle={{ backgroundColor: "#161a1d" }}>
+      <Drawer.Screen name="Home" component={Home} headerTitleStyle={{ color: "white" }} />
       <Drawer.Screen name="IDK" component={ScreenOne} />
       <Drawer.Screen name="About" component={ScreenTwo} />
       <Drawer.Screen name="Settings" component={ScreenThree} />
@@ -66,3 +66,5 @@ export default class Main extends React.Component {
     );
   }
 }
+
+export default Main;

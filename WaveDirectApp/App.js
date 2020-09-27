@@ -37,9 +37,9 @@ class App extends React.Component {
   render() {
     return (
       <>
-      <NavigationContainer>
-        <Main></Main>
-      </NavigationContainer>
+        <NavigationContainer>
+          <Login></Login>
+        </NavigationContainer>
       </>
     );
   }
