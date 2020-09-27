@@ -14,6 +14,8 @@ import {
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Account from './Account';
+import Map from './Map';
 //import { TouchableOpacity } from 'react-native-gesture-handler';
 // import { createMaterialBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import { createMaterialTopTabNavigator } from '@react-navigation/top-tabs';
@@ -29,8 +31,8 @@ export default class Main extends React.Component {
       <Stack.Screen
         name="Home"
         children={this.createDrawer}
-        options={({ navigation }) => ({
-          title: "Home",
+        options={({ navigation, route }) => ({
+          title: "My WaveDirect",
           headerTitleStyle: {color: "white"},
           headerStyle: {backgroundColor: "#161a1d"},
           headerLeft: () =>
@@ -49,9 +51,9 @@ export default class Main extends React.Component {
     </Stack.Navigator>
 
   createDrawer = () =>
-    <Drawer.Navigator drawerStyle={{backgroundColor: "#161a1d"}}>
-      <Drawer.Screen name="Home" component={Home} headerTitleStyle={{color: "white"}}/>
-      <Drawer.Screen name="IDK" component={ScreenOne} />
+    <Drawer.Navigator drawerStyle={{backgroundColor: "#161a1d", color: "white"}} drawerContentOptions={{labelStyle:{color:"white"}}}>
+      <Drawer.Screen name="Home" component={Home}/>
+      <Drawer.Screen name="Account" component={Account} />
       <Drawer.Screen name="About" component={ScreenTwo} />
       <Drawer.Screen name="Settings" component={ScreenThree} />
     </Drawer.Navigator>

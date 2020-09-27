@@ -44,7 +44,7 @@ import { auth } from 'firebase';
 //         });
 // }
 
-function Login() {
+function Login({ navigation: { navigate} }) {
     const [value, onChangeText] = React.useState('Email');
     const [password, onChangePassword] = React.useState('Password');
     const [errorMsg, setErrorMsg] = useState('')
@@ -179,7 +179,7 @@ function Login() {
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.back}
-                            onPress={() => { handleClick(value, password) }}
+                            onPress={() => { navigation.navigate('Main')}}
                         >
                             <Text style={styles.backText}>Back</Text>
                         </TouchableOpacity>
