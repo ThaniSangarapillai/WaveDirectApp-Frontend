@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 import { styles } from './styles';
 
 ScreenTwo = () => (
-  <View style={StyleSheetList.container}>
+  <View style={styles.container}>
     <Text style={styles.title}>About</Text>
   </View>
 );

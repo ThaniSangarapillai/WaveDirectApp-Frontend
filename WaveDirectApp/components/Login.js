@@ -15,37 +15,15 @@ import { Header, Input } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import logo from './logo.png';
+import { auth } from 'firebase';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 
-
-
-// function handleClick(value, password) {
-//     console.log(JSON.stringify({
-//         "email": value,
-//         'password': password
-//     }))
-//     fetch('http://192.168.0.119:5000/login', {
-//         method: 'POST',
-//         headers: {
-//             Accept: '*',
-//             'Content-Type': 'application/json',
-//             Origin: 'AUTHORITY',
-//         },
-//         body: JSON.stringify({
-//             "email": value,
-//             'password': password
-//         })
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log(data);
-
-//         });
-// }
-
-function Login({navigation}) {
+function Login({ navigation }) {
     const [value, onChangeText] = React.useState('Email');
     const [password, onChangePassword] = React.useState('Password');
-    const [errorMsg, setErrorMsg] = useState('')
+    const [errorMsg, setErrorMsg] = useState('');
 
     function handleClick(value, password) {
         console.log(JSON.stringify({
@@ -93,22 +71,8 @@ function Login({navigation}) {
 
     return (
         <>
-            {/* <Header></Header> */}
             <View style={styles.container}>
                 <StatusBar barStyle="light-content" backgroundColor="#161a1d" />
-                {/* <Header
-                        statusBarProps={{ barStyle: 'light-content', backgroundColor: "#161a1d" }}
-                        barStyle="light-content" 
-                        leftComponent={{ icon: 'chevron-left', color: '#fff' }}
-                        containerStyle={{
-                            backgroundColor: "#161a1d",
-                            borderBottomColor: "#00000000",
-                            height: 00
-                        }}
-                        outerContainerStyles={{
-                            borderBottomColor: "#00000000"
-                        }}
-                    /> */}
                 <View>
                     <Input
                         placeholder='Email'

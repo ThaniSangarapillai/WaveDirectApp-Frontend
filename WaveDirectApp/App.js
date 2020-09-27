@@ -38,9 +38,9 @@ class App extends Component {
   render() {
     return (
       <>
-      <NavigationContainer>
-        <Main></Main>
-      </NavigationContainer>
+        <NavigationContainer>
+          <Login></Login>
+        </NavigationContainer>
       </>
     );
   }
